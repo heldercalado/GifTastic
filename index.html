@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+<body>
+<!-- container div to hold all content of the page -->
+<div class="container-fluid" id="container">
+    <!-- div that will hold all the predefined buttons from rhe array in ./assets/script.js-->
+
+<!-- div that will hold the newly created buttons accordding to the users choice -->
+
+
+
+</div>
+<!-- here will be the list of results returned from the api for each time the user
+press any of the buttons -->
+
+
+
+<script>
+
+
+$(document).ready(function(){
+    
+    // instanciate a new pageLayout Class found in script.js
+    var myClass = new pageLayout();
+    //creates an array to receive the results from the ajax call 
+    // and pass on to the class to be handled
+    var myArray = [];
+
+function ajaxCall(a){
+    var myUrl = "https://api.giphy.com/v1/gifs/search?q=" + a + "&api_key=lonaa7UVenTdkYF8j7rF8zAmZyRqLfqM&limit=10"
+$.ajax({
+    url: myUrl,
+    method: "GET",
+}).done(function(dataResult) {
+    // Verify good data
+    // Do stuff
+    console.log(dataResult.data.length);
+    for (var i =0 ; i< dataResult.data.length;i++){
+        myArray.push(dataResult.data[i]);
+    }
+    
+    myClass.renderResults(myArray);
+    
+
+    
+    
+});
+
+
+
+}
+
+
+// listen to click event of all the button with a class of .searchbutton
+$(".searchbutton").on("click",function(){
+    //gets the string of the clicked text 
+    myArray=[];
+    var myString = $(this).text();
+    //calls the ajaxCall function to get the results from the api call
+    ajaxCall(myString);
+    });
+
+
+$('body').on('click','img' , function(){
+    
+   myClass.changeImgUrl($(this).attr('id'));
+
+   
+
+});
+
+
+});
+
+
+
+
+</script>
+ <script src="./assets/script/script.js"></script>
+<body>
+    
+</body>
+</html>

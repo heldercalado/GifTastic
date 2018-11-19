@@ -1,0 +1,23 @@
+* {
+    padding: 0;
+    margin: 0 ;
+    box-sizing: border-box;
+}
+.btn {
+    margin: 5px 5px;
+}
+
+#search {
+width: 35%;
+float: right;
+
+}
+
+li {
+    list-style-type: none;
+}
+
+
+#container {
+    width: 100%;
+}
