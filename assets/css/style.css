@@ -24,6 +24,10 @@ border-bottom: 1px solid green;
 li {
     list-style-type: none;
 }
+img {
+    width:300px;
+    height: 300px;
+}
 
 
 #container {
