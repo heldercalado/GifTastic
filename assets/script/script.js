@@ -7,7 +7,9 @@ class pageLayout {
         this.topics = ["The Matrix", "Back to the Future", "Animatrix", "Friday", "Pulp Fiction"];
         // call out the function loadPage for buld the intial page layout
         this.loadPage();
+        //initialize the array the will hold the ajax call results from the api 
         this.resultsObject = [];
+        
     }
    
 //function to load the initial elements of the page
@@ -41,7 +43,7 @@ loadPage() {
     
     $(".form-inline").append("<label for='addtext'>Type a subject to add the button</label>")
     $(".form-inline").append("<input class='form-control' id='addtext' type='search' placeholder='Search' aria-label='Search'></input>");
-    $(".form-inline").append("<button class='btn btn-outline-success my-2 my-sm-0' type='button'>Search</button>");
+    $(".form-inline").append("<button class='btn btn-outline-success my-2 my-sm-0 add' type='button'>ADD</button>");
     
 
 }
@@ -85,32 +87,44 @@ for (var i = 0 ; i < a.length ; i++){
     
         var myId = i + 1
     $("#searchresults").append("<div class='card' id=" + myId +" style='width: 25%;'>");
-    $("#"+ myId).append("<div class='card-header'>"+a[i].title+"</div>" )
+    $("#"+ myId).append("<div class='card-header text-center bg-success text-white'>"+a[i].title+"</div>" )
     $("#"+ myId).append("<img class='card-img-top ' id='img" + i +"' src='"+ a[i].images.original_still.url   +"' alt='Card image cap'>");
     $("#"+ myId).append("<div class='card-body' id='cb"+ myId +"'>");
     
-    $("#cb"+ myId).append("<ul><li>Rating: "+ a[i].rating + "</li><li>ID: "+ a[i].id + "</li></ul>" )
-    $("#cb"+ myId).append("<a href='"+a[i].source+"' class='btn btn-primary'>Source</a>");
+    $("#cb"+ myId).append("<ul class='text-center'><li><strong>Rating</strong>: "+ a[i].rating + "</li><li><strong>ID:</strong> "+ a[i].id + "</li></ul>" )
+    $("#cb"+ myId).append("<a href='"+a[i].source+"' class='btn btn-primary bg-success text-white'>Source</a>");
 }
-//<a href="#" class="btn btn-primary">Go somewhere</a>
+
  
 }
 
-changeImgUrl(argID){
-var indexNumber = parseInt(argID.slice(-1));
-var staticGif = this.resultsObject[indexNumber].images.original_still.url;
-var liveGif = this.resultsObject[indexNumber].images.original.url;;
 
+// changeURL -> this method works like a .toogle for displaying either the static img or the live gif
+
+
+changeImgUrl(argID){
+// takes as parameter the id of the clicked img and strips down the string portion of its name
+// gets the last char of the name by using the slice(-1)  
+// and parseInt turns that string result into a number and sets a variable to store that number   
+var indexNumber = parseInt(argID.slice(-1));
+// with the index set above , gets the src of the static image that is still 
+// loaded into the class array (resultsObject)
+var staticGif = this.resultsObject[indexNumber].images.original_still.url;
+// with the index set above , gets the src of the live image that is still 
+// loaded into the class array (resultsObject)
+var liveGif = this.resultsObject[indexNumber].images.original.url;
+// now check if the current src of the clicked img element is static then,
+// change to the live url
 
 if ($("#"+argID).attr('src') === staticGif){
     $("#"+argID).attr('src' , liveGif);
 }else{
+// else , change to the static
     $("#"+argID).attr('src' , staticGif);
 }
-
 }
     
-}
+} // end of the class code here 
 
 
 

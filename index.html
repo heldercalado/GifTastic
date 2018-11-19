@@ -51,37 +51,38 @@ $.ajax({
     for (var i =0 ; i< dataResult.data.length;i++){
         myArray.push(dataResult.data[i]);
     }
-    
-    myClass.renderResults(myArray);
-    
-
-    
-    
-});
-
-
-
+        myClass.renderResults(myArray);
+    });
 }
 
 
 // listen to click event of all the button with a class of .searchbutton
-$(".searchbutton").on("click",function(){
-    //gets the string of the clicked text 
+
+    $('body').on('click','.searchbutton' , function(){
+    //resets the array for a new api call
     myArray=[];
+    //gets the string of the clicked text 
     var myString = $(this).text();
     //calls the ajaxCall function to get the results from the api call
     ajaxCall(myString);
-    });
+ });
 
-
+// listen to a click event for the img element 
+// then call the changeUrl method from the class to change 
+// the src from static to live or vice versa
+// for more info please see the class changeUrl method
 $('body').on('click','img' , function(){
     
    myClass.changeImgUrl($(this).attr('id'));
-
-   
-
 });
 
+$(".add").on("click", function(){
+    var myText = $("#addtext").val();
+    
+//
+$("#predefinedbuttons").append("<button type='button' class='btn btn-success searchbutton'>" + myText + "</button>");
+    
+})
 
 });
 

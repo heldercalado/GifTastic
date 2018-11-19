@@ -8,9 +8,17 @@
 }
 
 #search {
-width: 35%;
+/* width: 35%; */
 float: right;
+margin-bottom:  15px;
+border-bottom: 1px solid green;
 
+}
+#search form{
+    margin: 15px;
+}
+#search label{
+    margin-right: 15px;
 }
 
 li {
@@ -19,5 +27,30 @@ li {
 
 
 #container {
-    width: 100%;
+    width: 100vw;
+    background-color: lightgray;
 }
+.card {
+    width:25%;
+    
+    margin-bottom: 15px;
+    float: left;
+    
+}
+
+.card-header {
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 680px) {
+    #search {
+      width: 100%;
+    }
+    .card{
+        float: none;
+        width: 100%
+    }
+    .container {
+        width: 100%;
+    }
+  }
